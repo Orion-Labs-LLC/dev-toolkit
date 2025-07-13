@@ -1,32 +1,20 @@
 {
   "name": "@boeschj/ts-tooling",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "TypeScript tooling configuration package with ESLint, Prettier, and TSConfigs",
   "main": "index.mts",
   "type": "module",
   "exports": {
-    ".": "./src/index.mts",
-    "./eslint": "./src/eslint/index.mts",
-    "./eslint/base": "./src/eslint/base.mts",
-    "./eslint/react": "./src/eslint/react.mts",
-    "./eslint/next": "./src/eslint/next.mts",
-    "./prettier": "./src/prettier.mts",
-    "./tsconfig": "./src/tsconfig/index.mts",
-    "./tsconfig/base": "./src/tsconfig/base.mts",
-    "./tsconfig/next": "./src/tsconfig/next.mts"
+    ".": "./dist/index.mjs",
+    "./eslint": "./dist/eslint/index.mjs",
+    "./prettier": "./dist/prettier-config/index.mjs",
+    "./tsconfig": "./src/tsconfig/base.json",
+    "./tsconfig/react": "./src/tsconfig/react.json",
+    "./tsconfig/node": "./src/tsconfig/node.json",
+    "./tsconfig/next": "./src/tsconfig/next.json"
   },
-  "files": [
-    "dist/**"
-  ],
-  "keywords": [
-    "typescript",
-    "eslint", 
-    "prettier",
-    "tsconfig",
-    "config",
-    "tooling",
-    "shared"
-  ],
+  "files": ["dist/**", "src/tsconfig/**"],
+
   "author": "Jordan Boesch",
   "license": "MIT",
   "repository": {

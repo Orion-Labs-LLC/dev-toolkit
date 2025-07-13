@@ -7,10 +7,7 @@ export default defineConfig({
     'src/eslint/base.mts',
     'src/eslint/react.mts',
     'src/eslint/next.mts',
-    'src/prettier.mts',
-    'src/tsconfig/index.mts',
-    'src/tsconfig/base.mts',
-    'src/tsconfig/next.mts'
+    'src/prettier-config/index.mts'
   ],
   format: ['esm'],
   dts: true,
