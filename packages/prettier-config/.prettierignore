@@ -1,0 +1,11 @@
+# .prettierignore
+node_modules/
+public/
+.next/
+dist/
+coverage/
+*.md
+*.svg
+*.yml
+*.yaml
+.vscode/

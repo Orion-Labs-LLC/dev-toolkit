@@ -1,0 +1,32 @@
+{
+  "name": "@boeschj/eslint-config",
+  "version": "1.0.0",
+  "description": "Shared ESLint configuration for boeschj projects",
+  "main": "index.js",
+  "type": "module",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "eslint",
+    "config",
+    "typescript",
+    "react",
+    "next"
+  ],
+  "author": "Jordan Boesch",
+  "license": "MIT",
+  "peerDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@next/eslint-plugin-next": "^15.1.6",
+    "eslint": "^9.20.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "typescript-eslint": "^8.23.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

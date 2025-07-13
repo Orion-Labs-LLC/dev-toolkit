@@ -1,0 +1,37 @@
+{
+  "name": "@boeschj/shared-configs",
+  "version": "1.0.0",
+  "description": "Shared configuration packages for development tooling",
+  "keywords": ["config", "eslint", "prettier", "typescript", "shared"],
+  "author": "boeschj",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boeschj/shared-configs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/boeschj/shared-configs/issues"
+  },
+  "homepage": "https://github.com/boeschj/shared-configs#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "pnpm@9.12.3",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm test && pnpm lint",
+    "publish:all": "pnpm -r publish",
+    "version:all": "pnpm -r version"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
