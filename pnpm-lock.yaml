@@ -23,6 +23,12 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^15.1.6
         version: 15.3.5
+      '@total-typescript/tsconfig':
+        specifier: ^1.0.4
+        version: 1.0.4
+      '@tsconfig/strictest':
+        specifier: ^2.0.5
+        version: 2.0.5
       eslint:
         specifier: ^9.20.0
         version: 9.31.0(jiti@1.21.7)
@@ -462,6 +468,12 @@ packages:
     resolution: {integrity: sha512-SRf1cytG7wqcHVLrBc9VtPK4pU5wxiB/lNIkNmW2ApKXIg+RpqwHfsaEK+e7eH4A1BpI6BX/aBWXxZCIrJg3uA==}
     cpu: [x64]
     os: [win32]
+
+  '@total-typescript/tsconfig@1.0.4':
+    resolution: {integrity: sha512-fO4ctMPGz1kOFOQ4RCPBRBfMy3gDn+pegUfrGyUFRMv/Rd0ZM3/SHH3hFCYG4u6bPLG8OlmOGcBLDexvyr3A5w==}
+
+  '@tsconfig/strictest@2.0.5':
+    resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -2144,6 +2156,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.45.0':
     optional: true
+
+  '@total-typescript/tsconfig@1.0.4': {}
+
+  '@tsconfig/strictest@2.0.5': {}
 
   '@types/estree@1.0.8': {}
 
