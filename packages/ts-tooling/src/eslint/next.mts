@@ -10,7 +10,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   {
     files: ["**/*.{ts,tsx}"],
     plugins: {
-      next: nextPlugin,
+      "@next/next": nextPlugin,
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
