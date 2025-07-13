@@ -1,19 +1,21 @@
 import eslint from "@eslint/js";
-// @ts-expect-error - No typedefs for this
 import securityPlugin from "eslint-plugin-security";
 import sonarjs from "eslint-plugin-sonarjs";
+import unicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import type { TSESLint } from "@typescript-eslint/utils";
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-  securityPlugin.configs.recommended,
-  sonarjs.configs.recommended,
-  
+  eslint.configs.recommended, //basic JS rules
+  tseslint.configs.strictTypeChecked, //strict TS rules that require type information
+  tseslint.configs.stylisticTypeChecked, //stylistic type rules
+  securityPlugin.configs.recommended, //security vulnerabilities
+  sonarjs.configs.recommended, //code complexity and patterns
+  unicorn.configs.recommended, //enforces modern JS usage and filename consistency
+  eslintPluginPrettierRecommended, //enforce prettier config as lint rules
   {
-    files: ["**/*.{ts,tsx, mts}"],
+    files: ["**/*.{ts,tsx,mts}"],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "error",
@@ -50,10 +52,17 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
         },
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
+      "unicorn/no-null": "off", //conflict with type checking
+      "unicorn/no-array-reduce": "off", //sometimes reduce is the best tool for the job 🤷‍♂️
+      "unicorn/prevent-abbreviations": "off", //too opinionated
+      "unicorn/prefer-node-protocol": "off", //forces us out of modern TS practices
+      "security/detect-non-literal-fs-filename": "warn", //false positive in jsx
+      "security/detect-object-injection": "warn" //triggers on some util functions
+
     },
     languageOptions: {
       parserOptions: {
-        project: true,
+        projectService: true
       },
     },
   },
@@ -71,7 +80,6 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     ],
     rules: {
       "@typescript-eslint/no-var-requires": "off",
-      "import/no-anonymous-default-export": "off",
     },
   },
 

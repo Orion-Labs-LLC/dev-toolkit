@@ -6,10 +6,10 @@ import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 import type { TSESLint } from "@typescript-eslint/utils";
-import typescriptConfig from "./base.mts";
+import baseConfig from "./base.mts";
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  ...typescriptConfig,
+  ...baseConfig,
 
   {
     files: ["**/*.{ts,tsx}"],
@@ -42,7 +42,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     },
     settings: {
       tailwindcss: {
-        callees: ["cn", "cva"],
+        callees: ["cn", "cva"], //lint tailwind in cn or cva utils
       },
     },
   }
