@@ -1,17 +1,9 @@
 {
-  "name": "@boeschj/shared-configs",
+  "name": "shared-configs",
   "version": "1.0.0",
   "description": "Shared configuration packages for dev tooling",
   "author": "boeschj",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/boeschj/shared-configs.git"
-  },
-  "bugs": {
-    "url": "https://github.com/boeschj/shared-configs/issues"
-  },
-  "homepage": "https://github.com/boeschj/shared-configs#readme",
   "workspaces": [
     "packages/*"
   ],
