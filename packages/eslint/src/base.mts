@@ -1,86 +1,29 @@
 import eslint from "@eslint/js";
-import nextPlugin from "@next/eslint-plugin-next";
-import jsxAccessibilityPlugin from "eslint-plugin-jsx-a11y";
-import reactPlugin from "eslint-plugin-react";
-import reactHooksPlugin from "eslint-plugin-react-hooks";
-import tailwindPlugin from "eslint-plugin-tailwindcss";
 import tseslint from "typescript-eslint";
+import type { TSESLint } from "@typescript-eslint/utils";
 
-export default tseslint.config(
-  //base
+const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
 
-  //react
-  {
-    files: ["**/*.{ts,tsx}"],
-    plugins: {
-      react: reactPlugin,
-      "react-hooks": reactHooksPlugin,
-      "jsx-a11y": jsxAccessibilityPlugin,
-    },
-    rules: {
-      ...reactPlugin.configs.recommended.rules,
-      ...reactHooksPlugin.configs.recommended.rules,
-      ...jsxAccessibilityPlugin.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-    },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
-  },
-
-  //next
-  {
-    files: ["**/*.{ts,tsx}"],
-    plugins: {
-      next: nextPlugin,
-    },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules, //enforce nextjs perf optimization
-    },
-  },
-
-  //tailwind
-  {
-    files: ["**/*.{ts,tsx}"],
-    plugins: {
-      tailwindcss: tailwindPlugin,
-    },
-    rules: {
-      ...tailwindPlugin.configs.recommended.rules,
-    },
-    settings: {
-      tailwindcss: {
-        callees: ["cn", "cva"], //includes tailwind in these functions for linting
-      },
-    },
-  },
-
-  //Typescript
   {
     files: ["**/*.{ts,tsx}"],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "error",
-        //Exclude underscore for ingored vars
-        { 
-          argsIgnorePattern: "^_", 
+        {
+          argsIgnorePattern: "^_",
           varsIgnorePattern: "^_",
           caughtErrorsIgnorePattern: "^_"
         },
       ],
-      "@typescript-eslint/no-confusing-void-expression": "off", //annoying in JSX
+      "@typescript-eslint/no-confusing-void-expression": "off",
       "@typescript-eslint/no-misused-promises": [
         "error",
         {
           checksVoidReturn: {
-            attributes: false, //also annoying in JSX
+            attributes: false,
           },
         },
       ],
@@ -126,10 +69,11 @@ export default tseslint.config(
       "import/no-anonymous-default-export": "off",
     },
   },
+
   {
     ignores: [
       ".eslintrc.js",
-      ".eslintrc.mjs", 
+      ".eslintrc.mjs",
       ".prettierrc.js",
       ".prettierrc.mjs",
       "node_modules/**",
@@ -144,3 +88,5 @@ export default tseslint.config(
     ],
   }
 );
+
+export default config;
