@@ -14,22 +14,15 @@ function detectPackageManager() {
     return 'pnpm';
   } catch {}
   
-  try {
-    execSync('yarn --version', { stdio: 'ignore' });
-    return 'yarn';
-  } catch {}
-  
   return 'npm';
 }
 
 function getInstallCommand(packageManager, packages, isDev = true) {
-  const devFlag = isDev ? (packageManager === 'npm' ? '--save-dev' : '--dev') : '';
+  const devFlag = isDev ? (packageManager === 'npm' ? '--save-dev' : '--D') : '';
   
   switch (packageManager) {
     case 'pnpm':
       return `pnpm add ${devFlag} ${packages.join(' ')}`;
-    case 'yarn':
-      return `yarn add ${devFlag} ${packages.join(' ')}`;
     case 'npm':
     default:
       return `npm install ${devFlag} ${packages.join(' ')}`;
