@@ -1,6 +1,7 @@
 import eslint from "@eslint/js";
 // @ts-expect-error - No typedefs for this
 import securityPlugin from "eslint-plugin-security";
+import sonarjs from "eslint-plugin-sonarjs";
 import tseslint from "typescript-eslint";
 import type { TSESLint } from "@typescript-eslint/utils";
 
@@ -9,6 +10,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   securityPlugin.configs.recommended,
+  sonarjs.configs.recommended,
   
   {
     files: ["**/*.{ts,tsx, mts}"],
