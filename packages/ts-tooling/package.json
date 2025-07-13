@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/utils": "^8.36.0",
+    "eslint-plugin-security": "^3.0.1",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
@@ -61,22 +62,22 @@
     "typescript-eslint": "^8.23.0"
   },
   "peerDependenciesMeta": {
-  "@next/eslint-plugin-next": {
-    "optional": true
+    "@next/eslint-plugin-next": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-tailwindcss": {
+      "optional": true
+    }
   },
-  "eslint-plugin-jsx-a11y": {
-    "optional": true
-  },
-  "eslint-plugin-react": {
-    "optional": true
-  },
-  "eslint-plugin-react-hooks": {
-    "optional": true
-  },
-  "eslint-plugin-tailwindcss": {
-    "optional": true
-  }
-},
   "publishConfig": {
     "access": "public"
   }
