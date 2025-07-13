@@ -7,23 +7,5 @@
       "@/*": ["./src/*"]
     },
     "plugins": [{ "name": "next" }]
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx", 
-    "**/*.cts",
-    "**/*.mts",
-    ".next/types/**/*.ts",
-    "types/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".next",
-    "coverage",
-    "**/*.spec.ts",
-    "**/*.test.ts",
-    "**/__tests__/*"
-  ]
+  }
 }

@@ -1,4 +1,5 @@
-/** @type {import("prettier").Config} */
+import { Config } from "prettier";
+
 const config = {
   // Base formatting rules
   printWidth: 100,
@@ -42,6 +43,6 @@ const config = {
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-};
+} satisfies Config;
 
 export default config;

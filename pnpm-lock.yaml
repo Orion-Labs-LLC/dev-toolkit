@@ -23,6 +23,9 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^15.1.6
         version: 15.3.5
+      '@rushstack/eslint-patch':
+        specifier: ^1.12.0
+        version: 1.12.0
       eslint:
         specifier: ^9.20.0
         version: 9.31.0(jiti@1.21.7)
@@ -462,6 +465,9 @@ packages:
     resolution: {integrity: sha512-SRf1cytG7wqcHVLrBc9VtPK4pU5wxiB/lNIkNmW2ApKXIg+RpqwHfsaEK+e7eH4A1BpI6BX/aBWXxZCIrJg3uA==}
     cpu: [x64]
     os: [win32]
+
+  '@rushstack/eslint-patch@1.12.0':
+    resolution: {integrity: sha512-5EwMtOqvJMMa3HbmxLlF74e+3/HhwBTMcvt3nqVJgGCozO6hzIPOBlwm8mGVNR9SN2IJpxSnlxczyDjcn7qIyw==}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -2144,6 +2150,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.45.0':
     optional: true
+
+  '@rushstack/eslint-patch@1.12.0': {}
 
   '@types/estree@1.0.8': {}
 

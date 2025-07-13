@@ -20,18 +20,5 @@
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force"
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.cts", 
-    "**/*.mts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage",
-    "**/*.spec.ts",
-    "**/*.test.ts", 
-    "**/__tests__/*"
-  ]
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@boeschj/ts-tooling",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "TypeScript tooling configuration package with ESLint, Prettier, and TSConfigs",
   "main": "index.mts",
   "type": "module",
@@ -13,8 +13,14 @@
     "./tsconfig/node": "./src/tsconfig/node.json",
     "./tsconfig/next": "./src/tsconfig/next.json"
   },
-  "files": ["dist/**", "src/tsconfig/**"],
-
+  "files": [
+    "dist/**",
+    "src/tsconfig/**",
+    "scripts/install-peerdeps.mjs"
+  ],
+  "bin": {
+    "install-ts-tooling-peerdeps": "./scripts/install-peerdeps.mjs"
+  },
   "author": "Jordan Boesch",
   "license": "MIT",
   "repository": {
@@ -37,25 +43,40 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "eslint": "^9.20.0",
-    "prettier": "^3.4.2", 
-    "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "@eslint/js": "^9.20.0",
     "@next/eslint-plugin-next": "^15.1.6",
+    "eslint": "^9.20.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-tailwindcss": "^3.18.0",
-    "typescript-eslint": "^8.23.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.20.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript-eslint": "^8.23.0"
   },
   "peerDependenciesMeta": {
-    "@next/eslint-plugin-next": { "optional": true },
-    "eslint-plugin-tailwindcss": { "optional": true },
-    "prettier-plugin-tailwindcss": { "optional": true }
+    "@next/eslint-plugin-next": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-tailwindcss": {
+      "optional": true
+    },
+    "prettier-plugin-tailwindcss": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"

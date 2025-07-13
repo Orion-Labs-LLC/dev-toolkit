@@ -7,11 +7,5 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cts",
-    "**/*.mts"
-  ]
+  }
 }
