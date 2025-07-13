@@ -8,7 +8,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...tseslint.configs.stylisticTypeChecked,
 
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ["**/*.{ts,tsx, mts}"],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "error",
