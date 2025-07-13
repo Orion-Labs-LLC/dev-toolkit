@@ -1,6 +1,6 @@
 {
   "name": "@boeschj/ts-tooling",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "TypeScript tooling configuration package with ESLint, Prettier, and TSConfigs",
   "main": "index.mts",
   "type": "module",
