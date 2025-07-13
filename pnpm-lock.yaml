@@ -9,14 +9,17 @@ importers:
   .:
     devDependencies:
       typescript:
-        specifier: ^5.0.0
+        specifier: ^5.8.3
         version: 5.8.3
 
-  packages/eslint:
+  packages/ts-tooling:
     dependencies:
       '@eslint/js':
         specifier: ^9.20.0
         version: 9.31.0
+      '@ianvs/prettier-plugin-sort-imports':
+        specifier: ^4.4.1
+        version: 4.5.1(prettier@3.6.2)
       '@next/eslint-plugin-next':
         specifier: ^15.1.6
         version: 15.3.5
@@ -35,6 +38,12 @@ importers:
       eslint-plugin-tailwindcss:
         specifier: ^3.18.0
         version: 3.18.0(tailwindcss@3.4.17)
+      prettier:
+        specifier: ^3.4.2
+        version: 3.6.2
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.11
+        version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.5.1(prettier@3.6.2))(prettier@3.6.2)
       typescript-eslint:
         specifier: ^8.23.0
         version: 8.36.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
@@ -48,20 +57,6 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
-
-  packages/prettier-config:
-    dependencies:
-      '@ianvs/prettier-plugin-sort-imports':
-        specifier: ^4.4.1
-        version: 4.5.1(prettier@3.6.2)
-      prettier:
-        specifier: ^3.4.2
-        version: 3.6.2
-      prettier-plugin-tailwindcss:
-        specifier: ^0.6.11
-        version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.5.1(prettier@3.6.2))(prettier@3.6.2)
-
-  packages/tsconfig: {}
 
 packages:
 

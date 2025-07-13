@@ -1,6 +1,9 @@
-{
-  "extends": "./base.json",
+import baseConfig from "./base.mts";
+
+const config = {
+  ...baseConfig,
   "compilerOptions": {
+    ...baseConfig.compilerOptions,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
@@ -20,4 +23,6 @@
     ".next/types/**/*.ts",
     "types/**/*"
   ]
-}
+};
+
+export default config;

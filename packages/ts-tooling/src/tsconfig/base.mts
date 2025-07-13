@@ -1,4 +1,4 @@
-{
+const config = {
   "compilerOptions": {
     "target": "ES2020",
     "lib": ["dom", "dom.iterable", "esnext", "ES2021.String"],
@@ -28,4 +28,6 @@
     "**/*.test.ts",
     "**/__tests__/*"
   ]
-}
+};
+
+export default config;

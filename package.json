@@ -1,8 +1,7 @@
 {
   "name": "@boeschj/shared-configs",
   "version": "1.0.0",
-  "description": "Shared configuration packages for development tooling",
-  "keywords": ["config", "eslint", "prettier", "typescript", "shared"],
+  "description": "Shared configuration packages for dev tooling",
   "author": "boeschj",
   "license": "MIT",
   "repository": {
@@ -28,7 +27,7 @@
     "version:all": "pnpm -r version"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=18.0.0",

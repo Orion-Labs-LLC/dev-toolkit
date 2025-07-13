@@ -1,0 +1,75 @@
+{
+  "name": "@boeschj/ts-tooling",
+  "version": "1.0.0",
+  "description": "TypeScript tooling configuration package with ESLint, Prettier, and TSConfigs",
+  "main": "index.mts",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mts",
+    "./eslint": "./src/eslint/index.mts",
+    "./eslint/base": "./src/eslint/base.mts",
+    "./eslint/react": "./src/eslint/react.mts",
+    "./eslint/next": "./src/eslint/next.mts",
+    "./prettier": "./src/prettier.mts",
+    "./tsconfig": "./src/tsconfig/index.mts",
+    "./tsconfig/base": "./src/tsconfig/base.mts",
+    "./tsconfig/next": "./src/tsconfig/next.mts"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "keywords": [
+    "typescript",
+    "eslint", 
+    "prettier",
+    "tsconfig",
+    "config",
+    "tooling",
+    "shared"
+  ],
+  "author": "Jordan Boesch",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boeschj/shared-configs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/boeschj/shared-configs/issues"
+  },
+  "homepage": "https://github.com/boeschj/shared-configs#readme",
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@typescript-eslint/utils": "^8.36.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "eslint": "^9.20.0",
+    "prettier": "^3.4.2", 
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.20.0",
+    "@next/eslint-plugin-next": "^15.1.6",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "typescript-eslint": "^8.23.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "prettier-plugin-tailwindcss": "^0.6.11"
+  },
+  "peerDependenciesMeta": {
+    "@next/eslint-plugin-next": { "optional": true },
+    "eslint-plugin-tailwindcss": { "optional": true },
+    "prettier-plugin-tailwindcss": { "optional": true }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
