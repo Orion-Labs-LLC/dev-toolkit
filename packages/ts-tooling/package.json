@@ -48,18 +48,24 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest --coverage",
     "clean": "rm -rf dist",
     "dev": "tsc --build tsconfig.build.json --watch"
   },
   "devDependencies": {
     "@types/eslint-plugin-security": "^3.0.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.10.5",
     "@typescript-eslint/utils": "^8.36.0",
+    "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.31.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-security": "^3.0.1",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "@eslint/js": "^9.20.0",
