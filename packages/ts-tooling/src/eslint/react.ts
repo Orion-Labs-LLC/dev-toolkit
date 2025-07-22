@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+// External ESLint plugins lack proper TypeScript definitions
+
+import type { TSESLint } from "@typescript-eslint/utils";
 // @ts-expect-error - No typedefs for this
 import jsxAccessibilityPlugin from "eslint-plugin-jsx-a11y";
-// @ts-expect-error - No typedefs for this
-import tailwindPlugin from "eslint-plugin-tailwindcss";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+// @ts-expect-error - No typedefs for this
+import tailwindPlugin from "eslint-plugin-tailwindcss";
 import tseslint from "typescript-eslint";
-import type { TSESLint } from "@typescript-eslint/utils";
+
 import baseConfig from "./base.js";
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
@@ -45,7 +49,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
         callees: ["cn", "cva"], //lint tailwind in cn or cva utils
       },
     },
-  }
+  },
 );
 
 export default config;

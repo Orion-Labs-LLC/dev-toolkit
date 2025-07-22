@@ -43,14 +43,20 @@
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "clean": "rm -rf dist",
     "dev": "tsc --build tsconfig.build.json --watch"
   },
   "devDependencies": {
     "@types/eslint-plugin-security": "^3.0.0",
     "@typescript-eslint/utils": "^8.36.0",
+    "eslint": "^9.31.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-security": "^3.0.1",
+    "prettier": "^3.6.2",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {

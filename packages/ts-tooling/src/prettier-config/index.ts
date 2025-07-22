@@ -1,4 +1,4 @@
-import { Config } from "prettier";
+import type { Config } from "prettier";
 
 const config = {
   // Base formatting rules

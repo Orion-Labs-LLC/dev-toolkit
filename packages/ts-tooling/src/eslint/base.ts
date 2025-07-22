@@ -1,10 +1,10 @@
 import eslint from "@eslint/js";
+import type { TSESLint } from "@typescript-eslint/utils";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import securityPlugin from "eslint-plugin-security";
 import sonarjs from "eslint-plugin-sonarjs";
 import unicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import type { TSESLint } from "@typescript-eslint/utils";
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   eslint.configs.recommended, //basic JS rules
@@ -22,7 +22,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
         {
           argsIgnorePattern: "^_",
           varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_"
+          caughtErrorsIgnorePattern: "^_",
         },
       ],
       "@typescript-eslint/no-confusing-void-expression": "off",
@@ -57,12 +57,12 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "unicorn/prevent-abbreviations": "off", //too opinionated
       "unicorn/prefer-node-protocol": "off", //forces us out of modern TS practices
       "security/detect-non-literal-fs-filename": "warn", //false positive in jsx
-      "security/detect-object-injection": "warn" //triggers on some util functions
-
+      "security/detect-object-injection": "warn", //triggers on some util functions,
+      "unicorn/import-style": "off", //This rule enforces bad practice. named imports are preferred
     },
     languageOptions: {
       parserOptions: {
-        projectService: true
+        projectService: true,
       },
     },
   },
@@ -73,11 +73,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   },
 
   {
-    files: [
-      "**/*.config.{js,mjs,ts}",
-      "**/tailwind.config.{js,ts}",
-      "**/next.config.{js,mjs}",
-    ],
+    files: ["**/*.config.{js,mjs,ts}", "**/tailwind.config.{js,ts}", "**/next.config.{js,mjs}"],
     rules: {
       "@typescript-eslint/no-var-requires": "off",
     },
@@ -99,7 +95,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "eslint.config.mjs",
       "*.min.js",
     ],
-  }
+  },
 );
 
 export default config;
