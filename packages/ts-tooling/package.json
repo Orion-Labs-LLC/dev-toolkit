@@ -26,11 +26,10 @@
   "files": [
     "dist/**",
     "src/tsconfig/**",
-    "src/prettier-config/.prettierignore",
-    "scripts/install-peerdeps.mjs"
+    "src/prettier-config/.prettierignore"
   ],
   "bin": {
-    "install-ts-tooling-peerdeps": "./scripts/install-peerdeps.mjs"
+    "install-ts-tooling-peerdeps": "./dist/scripts/install-peerdeps.js"
   },
   "author": "Jordan Boesch",
   "license": "MIT",
@@ -54,6 +53,7 @@
   },
   "devDependencies": {
     "@types/eslint-plugin-security": "^3.0.0",
+    "@types/node": "^22.10.5",
     "@typescript-eslint/utils": "^8.36.0",
     "eslint": "^9.31.0",
     "eslint-plugin-prettier": "^5.5.1",
@@ -62,22 +62,22 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@next/eslint-plugin-next": "^15.1.6",
+    "@total-typescript/tsconfig": "^1.0.4",
+    "@tsconfig/strictest": "^2.0.5",
     "eslint": "^9.20.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-tailwindcss": "^3.18.0",
-    "prettier": "^3.4.2",
-    "typescript": "^5.8.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript-eslint": "^8.23.0",
-    "@eslint/js": "^9.20.0",
-    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "@total-typescript/tsconfig": "^1.0.4",
-    "@tsconfig/strictest": "^2.0.5",
     "eslint-plugin-sonarjs": "^3.0.4",
-    "eslint-plugin-unicorn": "^59.0.1"
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "eslint-plugin-unicorn": "^59.0.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.23.0"
   },
   "dependencies": {
     "globals": "^16.3.0"

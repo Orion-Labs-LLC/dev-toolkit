@@ -101,6 +101,9 @@ importers:
       '@types/eslint-plugin-security':
         specifier: ^3.0.0
         version: 3.0.0
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.16.5
       '@typescript-eslint/utils':
         specifier: ^8.36.0
         version: 8.36.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
