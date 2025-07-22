@@ -41,7 +41,13 @@ export function getInstallCommand(
 }
 
 export function copyConfigFiles(): void {
-  const sourcePrettierIgnore = path.join(__dirname, "..", "src", "prettier-config", ".prettierignore");
+  const sourcePrettierIgnore = path.join(
+    __dirname,
+    "..",
+    "src",
+    "prettier-config",
+    ".prettierignore",
+  );
   const targetPrettierIgnore = path.join(process.cwd(), ".prettierignore");
 
   if (existsSync(sourcePrettierIgnore)) {
@@ -80,7 +86,7 @@ export function main(): void {
 
     execSync(command, { stdio: "inherit" });
     console.log("✅ Peer dependencies installed successfully!");
-    
+
     // Copy configuration files
     copyConfigFiles();
   } catch (error) {
