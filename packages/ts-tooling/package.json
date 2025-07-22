@@ -17,6 +17,7 @@
       "types": "./dist/prettier-config/index.d.ts",
       "import": "./dist/prettier-config/index.js"
     },
+    "./prettier/.prettierignore": "./src/prettier-config/.prettierignore",
     "./tsconfig": "./src/tsconfig/base.json",
     "./tsconfig/react": "./src/tsconfig/react.json",
     "./tsconfig/node": "./src/tsconfig/node.json",
@@ -25,6 +26,7 @@
   "files": [
     "dist/**",
     "src/tsconfig/**",
+    "src/prettier-config/.prettierignore",
     "scripts/install-peerdeps.mjs"
   ],
   "bin": {
