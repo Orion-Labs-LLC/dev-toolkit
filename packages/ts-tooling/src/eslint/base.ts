@@ -49,6 +49,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
         {
           prefer: "type-imports",
           fixStyle: "inline-type-imports",
+          disallowTypeAnnotations: false,
         },
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
