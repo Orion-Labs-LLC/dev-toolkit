@@ -41,8 +41,6 @@ const config = {
     "",
     "^[./]",
   ],
-  importOrderSeparation: true,
-  importOrderSortSpecifiers: true,
 } satisfies Config;
 
 export default config;
