@@ -2,7 +2,7 @@
 import nextPlugin from "@next/eslint-plugin-next";
 import tseslint from "typescript-eslint";
 import type { TSESLint } from "@typescript-eslint/utils";
-import reactConfig from "./react.mts";
+import reactConfig from "./react.js";
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...reactConfig,

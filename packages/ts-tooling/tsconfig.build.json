@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "module": "ESNext",
+    "target": "ES2022",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/tsconfig/**",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
+}
