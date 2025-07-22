@@ -1,0 +1,51 @@
+{
+  "name": "@boeschj/ide-tooling",
+  "version": "0.0.0",
+  "description": "IDE configuration and setup tooling for development environments",
+  "main": "dist/index.mjs",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "files": [
+    "dist/**",
+    "templates/**",
+    "scripts/init.mjs"
+  ],
+  "bin": {
+    "init": "./scripts/init.mjs"
+  },
+  "author": "Jordan Boesch",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boeschj/shared-configs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/boeschj/shared-configs/issues"
+  },
+  "homepage": "https://github.com/boeschj/shared-configs#readme",
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "rm -rf dist",
+    "dev": "tsc --build --watch"
+  },
+  "devDependencies": {
+    "@boeschj/ts-tooling": "workspace:*",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.31.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
