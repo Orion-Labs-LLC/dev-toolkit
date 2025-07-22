@@ -13,7 +13,7 @@ interface PackageJson {
   peerDependencies?: Record<string, string>;
 }
 
-function detectPackageManager(): PackageManager {
+export function detectPackageManager(): PackageManager {
   try {
     execSync("pnpm --version", { stdio: "ignore" });
     return "pnpm";
@@ -24,7 +24,7 @@ function detectPackageManager(): PackageManager {
   return "npm";
 }
 
-function getInstallCommand(
+export function getInstallCommand(
   packageManager: PackageManager,
   packages: string[],
   isDevelopment = true,
@@ -40,7 +40,7 @@ function getInstallCommand(
   return `npm install ${developmentFlag} ${packages.join(" ")}`;
 }
 
-function copyConfigFiles(): void {
+export function copyConfigFiles(): void {
   const sourcePrettierIgnore = path.join(__dirname, "..", "src", "prettier-config", ".prettierignore");
   const targetPrettierIgnore = path.join(process.cwd(), ".prettierignore");
 
@@ -56,7 +56,7 @@ function copyConfigFiles(): void {
   }
 }
 
-function main(): void {
+export function main(): void {
   try {
     // Read package.json to get peer dependencies
     const packageJsonPath = path.join(__dirname, "..", "package.json");
@@ -89,4 +89,7 @@ function main(): void {
   }
 }
 
-main();
+// Only run main if this file is executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main();
+}
