@@ -1,0 +1,50 @@
+{
+  "name": "@boeschj/claude-code-config",
+  "version": "1.0.0",
+  "description": "Claude Code configuration and custom command tooling",
+  "main": "dist/index.mjs",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "files": [
+    "dist/**",
+    "templates/**",
+    "scripts/*.mjs"
+  ],
+  "bin": {
+    "claude-init": "./scripts/init.mjs",
+    "claude-security-scan": "./scripts/security-scan.mjs",
+    "claude-refactor": "./scripts/refactor.mjs",
+    "claude-infrastructure": "./scripts/infrastructure.mjs",
+    "claude-init-project": "./scripts/init-project.mjs"
+  },
+  "author": "Jordan Boesch",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boeschj/shared-configs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/boeschj/shared-configs/issues"
+  },
+  "homepage": "https://github.com/boeschj/shared-configs#readme",
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@boeschj/ts-tooling": "workspace:*",
+    "@types/node": "^22.10.5",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "extends": "@boeschj/ts-tooling/tsconfig/node",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*", "scripts/**/*"],
+  "exclude": ["node_modules", "dist", "templates"]
+}
