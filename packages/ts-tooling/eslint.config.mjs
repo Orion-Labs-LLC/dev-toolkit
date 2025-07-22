@@ -1,3 +1,3 @@
-import node from "./dist/eslint/node.js";
+import { node } from "./dist/eslint/index.js";
 
 export default node;
