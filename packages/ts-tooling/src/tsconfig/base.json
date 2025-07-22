@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@tsconfig/strictest",
   "compilerOptions": {
+    "resolveJsonModule": false,
     "noUncheckedSideEffectImports": true,
     "incremental": true,
     "forceConsistentCasingInFileNames": true
