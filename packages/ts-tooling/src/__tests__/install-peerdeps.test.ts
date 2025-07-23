@@ -8,7 +8,7 @@ import {
   detectPackageManager,
   getInstallCommand,
   main,
-} from "../../scripts/install-peerdeps.js";
+} from "../scripts/install-peerdeps";
 
 // Mock all Node.js modules
 vi.mock("node:child_process");
@@ -25,6 +25,7 @@ describe("Package Manager Detection", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Mock console methods to avoid cluttering test output
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
@@ -50,6 +51,7 @@ describe("Package Manager Detection", () => {
 
     expect(result).toBe("npm");
     expect(mockExecSync).toHaveBeenCalledWith("pnpm --version", { stdio: "ignore" });
+
     expect(console.log).toHaveBeenCalledWith("pnpm not available, falling back to npm");
   });
 
@@ -100,7 +102,7 @@ describe("Install Command Generation", () => {
   it("should handle empty package list", () => {
     const command = getInstallCommand("pnpm", [], true);
 
-    expect(command).toBe("pnpm add --D ");
+    expect(command).toBe("pnpm add --D");
   });
 
   it("should handle single package", () => {
@@ -123,7 +125,9 @@ describe("Install Command Generation", () => {
 describe("Config Files Copying", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     vi.spyOn(console, "log").mockImplementation(() => {});
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     vi.spyOn(console, "warn").mockImplementation(() => {});
 
     // Mock path.join to return predictable paths
@@ -139,6 +143,7 @@ describe("Config Files Copying", () => {
 
   it("should copy .prettierignore when source file exists", () => {
     mockExistsSync.mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 
     copyConfigFiles();
@@ -148,6 +153,7 @@ describe("Config Files Copying", () => {
       expect.stringContaining(".prettierignore"),
       "/project/root/.prettierignore",
     );
+
     expect(console.log).toHaveBeenCalledWith("✅ Copied .prettierignore to project root");
   });
 
@@ -158,6 +164,7 @@ describe("Config Files Copying", () => {
 
     expect(mockExistsSync).toHaveBeenCalledWith(expect.stringContaining(".prettierignore"));
     expect(mockCopyFileSync).not.toHaveBeenCalled();
+
     expect(console.warn).toHaveBeenCalledWith("⚠️ .prettierignore not found in package");
   });
 
@@ -170,6 +177,7 @@ describe("Config Files Copying", () => {
     copyConfigFiles();
 
     expect(mockCopyFileSync).toHaveBeenCalled();
+
     expect(console.warn).toHaveBeenCalledWith(
       "⚠️ Failed to copy .prettierignore:",
       "Permission denied",
@@ -178,19 +186,22 @@ describe("Config Files Copying", () => {
 
   it("should use correct source and target paths", () => {
     mockExistsSync.mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 
     copyConfigFiles();
 
     // Verify that path.join was called for both source and target paths
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(mockPath.join).toHaveBeenCalledTimes(2);
 
     // Check the first call (source path) - verify structure without checking __dirname value
     const firstCall = mockPath.join.mock.calls[0];
     expect(firstCall).toHaveLength(5);
-    expect(firstCall.slice(1)).toEqual(["..", "src", "prettier-config", ".prettierignore"]);
+    expect(firstCall?.slice(1)).toEqual(["..", "src", "prettier-config", ".prettierignore"]);
 
     // Check the second call (target path)
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(mockPath.join).toHaveBeenCalledWith("/project/root", ".prettierignore");
   });
 });
@@ -198,9 +209,13 @@ describe("Config Files Copying", () => {
 describe("Main Function Integration", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     vi.spyOn(console, "log").mockImplementation(() => {});
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     vi.spyOn(console, "warn").mockImplementation(() => {});
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     vi.spyOn(console, "error").mockImplementation(() => {});
+
     vi.spyOn(process, "exit").mockImplementation(() => undefined as never);
 
     // Mock path operations
@@ -223,6 +238,7 @@ describe("Main Function Integration", () => {
     mockExecSync.mockReturnValueOnce(Buffer.from("8.0.0")); // pnpm detection
     mockExecSync.mockReturnValueOnce(Buffer.from("")); // install command
     mockExistsSync.mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 
     main();
@@ -232,8 +248,11 @@ describe("Main Function Integration", () => {
     expect(mockExecSync).toHaveBeenCalledWith("pnpm add --D eslint@^8.0.0 typescript@^5.0.0", {
       stdio: "inherit",
     });
+
     expect(console.log).toHaveBeenCalledWith("Detected package manager: pnpm");
+
     expect(console.log).toHaveBeenCalledWith("Installing peer dependencies: eslint, typescript");
+
     expect(console.log).toHaveBeenCalledWith("✅ Peer dependencies installed successfully!");
   });
 
@@ -273,6 +292,7 @@ describe("Main Function Integration", () => {
       "❌ Failed to install peer dependencies:",
       "File not found",
     );
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(process.exit).toHaveBeenCalledWith(1);
   });
 
@@ -285,6 +305,7 @@ describe("Main Function Integration", () => {
       "❌ Failed to install peer dependencies:",
       expect.stringContaining("Unexpected token"),
     );
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(process.exit).toHaveBeenCalledWith(1);
   });
 
@@ -305,6 +326,7 @@ describe("Main Function Integration", () => {
       "❌ Failed to install peer dependencies:",
       "Install failed",
     );
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(process.exit).toHaveBeenCalledWith(1);
   });
 
@@ -323,6 +345,7 @@ describe("Main Function Integration", () => {
     main();
 
     expect(console.log).toHaveBeenCalledWith("pnpm not available, falling back to npm");
+
     expect(console.log).toHaveBeenCalledWith("Detected package manager: npm");
     expect(mockExecSync).toHaveBeenCalledWith("npm install --save-dev eslint@^8.0.0", {
       stdio: "inherit",
@@ -338,11 +361,13 @@ describe("Main Function Integration", () => {
     mockExecSync.mockReturnValueOnce(Buffer.from("8.0.0")); // pnpm detection
     mockExecSync.mockReturnValueOnce(Buffer.from("")); // install
     mockExistsSync.mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 
     main();
 
     expect(mockCopyFileSync).toHaveBeenCalled();
+
     expect(console.log).toHaveBeenCalledWith("✅ Copied .prettierignore to project root");
   });
 });

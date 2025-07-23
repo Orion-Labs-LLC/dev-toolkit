@@ -61,11 +61,12 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "security/detect-object-injection": "warn", //triggers on some util functions,
       "unicorn/import-style": "off", //This rule enforces bad practice. named imports are preferred
     },
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-      },
-    },
+    //Disabled to mitigate an annoying warning about JSON module imports being an experimental feature
+    // languageOptions: {
+    //   parserOptions: {
+    //     projectService: true,
+    //   },
+    // },
   },
 
   {

@@ -1,0 +1,36 @@
+# Logs and databases
+*.log
+*.sqlite
+
+# Dependencies
+node_modules/
+.pnpm/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+coverage/
+.turbo/
+
+# Environment and config files
+.env*
+.claude/
+*.min.js
+*.min.css
+
+# Documentation and meta files
+*.md
+CHANGELOG*
+LICENSE*
+
+# Package manager files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# IDE and system files
+.DS_Store
+.vscode/
+.idea/

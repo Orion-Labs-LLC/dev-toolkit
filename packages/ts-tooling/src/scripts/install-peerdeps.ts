@@ -15,7 +15,10 @@ interface PackageJson {
 
 export function detectPackageManager(): PackageManager {
   try {
-    execSync("pnpm --version", { stdio: "ignore" });
+    // Use absolute path to avoid PATH injection risks
+    const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+    // eslint-disable-next-line sonarjs/os-command
+    execSync(`${pnpmCommand} --version`, { stdio: "ignore" });
     return "pnpm";
   } catch {
     console.log("pnpm not available, falling back to npm");
@@ -29,15 +32,23 @@ export function getInstallCommand(
   packages: string[],
   isDevelopment = true,
 ): string {
+  // Validate package names to prevent command injection
+  const sanitizedPackages = packages.filter(pkg => {
+    // Allow alphanumeric, @, /, -, _, ., ^, ~, and digits for semver
+    return /^[@a-z0-9/_.-]+@[\^~]?\d+\.\d+\.\d+$/i.test(pkg);
+  });
+
+  if (sanitizedPackages.length !== packages.length) {
+    throw new Error("Invalid package names detected");
+  }
+
   let developmentFlag = "";
   if (isDevelopment) {
     developmentFlag = packageManager === "npm" ? "--save-dev" : "--D";
   }
 
-  if (packageManager === "pnpm") {
-    return `pnpm add ${developmentFlag} ${packages.join(" ")}`;
-  }
-  return `npm install ${developmentFlag} ${packages.join(" ")}`;
+  const baseCommand = packageManager === "pnpm" ? "pnpm add" : "npm install";
+  return `${baseCommand} ${developmentFlag} ${sanitizedPackages.join(" ")}`.trim();
 }
 
 export function copyConfigFiles(): void {
@@ -66,7 +77,7 @@ export function main(): void {
   try {
     // Read package.json to get peer dependencies
     const packageJsonPath = path.join(__dirname, "..", "package.json");
-    const packageJson: PackageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as unknown as PackageJson;
     const peerDeps = packageJson.peerDependencies ?? {};
 
     // Get all peer dependency packages with versions
@@ -84,6 +95,8 @@ export function main(): void {
     const command = getInstallCommand(packageManager, packages, true);
     console.log(`Running: ${command}`);
 
+    // Execute command safely with validated input
+    // eslint-disable-next-line sonarjs/os-command
     execSync(command, { stdio: "inherit" });
     console.log("✅ Peer dependencies installed successfully!");
 

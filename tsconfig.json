@@ -1,0 +1,13 @@
+{
+  "extends": "@boeschj/ts-tooling/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["packages/*/src/**/*", "packages/*/*.ts", "packages/*/*.mts", "*.ts", "*.mts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts", "coverage"]
+}

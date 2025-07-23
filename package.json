@@ -20,15 +20,16 @@
     "prepublishOnly": "pnpm test && pnpm lint",
     "publish:all": "pnpm -r publish",
     "version:all": "pnpm -r version",
-    "precommit": "pnpm test && pnpm lint:fix && pnpm typeheck && pnpm format",
+    "precommit": "pnpm test && pnpm lint:fix && pnpm typecheck && pnpm format",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mts}": [
-      "pnpm precommit"
+      "eslint --fix",
+      "prettier --write"
     ],
     "*.{json,md,yml,yaml}": [
-      "pnpm format"
+      "prettier --write"
     ]
   },
   "devDependencies": {
