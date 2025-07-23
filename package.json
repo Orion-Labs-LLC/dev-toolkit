@@ -12,20 +12,23 @@
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint --fix",
+    "format": "prettier --write .",
+    "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r clean",
     "prepack": "pnpm build",
     "prepublishOnly": "pnpm test && pnpm lint",
     "publish:all": "pnpm -r publish",
     "version:all": "pnpm -r version",
+    "precommit": "pnpm test && pnpm lint:fix && pnpm typeheck && pnpm format",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mts}": [
-      "pnpm lint --fix",
-      "pnpm test --passWithNoTests"
+      "pnpm precommit"
     ],
     "*.{json,md,yml,yaml}": [
-      "prettier --write"
+      "pnpm format"
     ]
   },
   "devDependencies": {
