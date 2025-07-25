@@ -13,6 +13,20 @@ interface PackageJson {
   peerDependencies?: Record<string, string>;
 }
 
+export function findPackageRoot(startDir: string): string {
+  let currentDir = startDir;
+
+  while (currentDir !== path.dirname(currentDir)) {
+    const packageJsonPath = path.join(currentDir, "package.json");
+    if (existsSync(packageJsonPath)) {
+      return currentDir;
+    }
+    currentDir = path.dirname(currentDir);
+  }
+
+  throw new Error("Could not find package.json in any parent directory");
+}
+
 export function detectPackageManager(): PackageManager {
   try {
     // Use absolute path to avoid PATH injection risks
@@ -52,13 +66,8 @@ export function getInstallCommand(
 }
 
 export function copyConfigFiles(): void {
-  const sourcePrettierIgnore = path.join(
-    __dirname,
-    "..",
-    "src",
-    "prettier-config",
-    ".prettierignore",
-  );
+  const packageRoot = findPackageRoot(__dirname);
+  const sourcePrettierIgnore = path.join(packageRoot, "src", "prettier-config", ".prettierignore");
   const targetPrettierIgnore = path.join(process.cwd(), ".prettierignore");
 
   if (existsSync(sourcePrettierIgnore)) {
@@ -75,8 +84,8 @@ export function copyConfigFiles(): void {
 
 export function main(): void {
   try {
-    // Read package.json to get peer dependencies
-    const packageJsonPath = path.join(__dirname, "..", "package.json");
+    const packageRoot = findPackageRoot(__dirname);
+    const packageJsonPath = path.join(packageRoot, "package.json");
     const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as unknown as PackageJson;
     const peerDeps = packageJson.peerDependencies ?? {};
 

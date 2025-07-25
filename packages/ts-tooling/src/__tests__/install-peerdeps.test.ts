@@ -1,11 +1,12 @@
 import { execSync } from "node:child_process";
-import { copyFileSync, existsSync, readFileSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync, type PathLike } from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   copyConfigFiles,
   detectPackageManager,
+  findPackageRoot,
   getInstallCommand,
   main,
 } from "../scripts/install-peerdeps";
@@ -20,6 +21,9 @@ const mockCopyFileSync = vi.mocked(copyFileSync);
 const mockExistsSync = vi.mocked(existsSync);
 const mockReadFileSync = vi.mocked(readFileSync);
 const mockPath = vi.mocked(path);
+
+// Create a global mock for findPackageRoot that can be reused across tests
+const _mockFindPackageRoot = vi.fn().mockReturnValue("/mock/package/root");
 
 describe("Package Manager Detection", () => {
   beforeEach(() => {
@@ -133,6 +137,14 @@ describe("Config Files Copying", () => {
     // Mock path.join to return predictable paths
     mockPath.join.mockImplementation((...args) => args.join("/"));
 
+    // Mock path.dirname for findPackageRoot traversal
+    mockPath.dirname.mockImplementation(p => {
+      if (p === "/dist/scripts") return "/dist";
+      if (p === "/dist") return "/mock/package/root";
+      if (p === "/mock/package/root") return "/";
+      return "/";
+    });
+
     // Mock process.cwd()
     vi.spyOn(process, "cwd").mockReturnValue("/project/root");
   });
@@ -142,7 +154,14 @@ describe("Config Files Copying", () => {
   });
 
   it("should copy .prettierignore when source file exists", () => {
-    mockExistsSync.mockReturnValue(true);
+    // Mock existsSync to simulate finding package.json and .prettierignore
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      const pathStr = filePath.toString();
+      return (
+        pathStr === "/mock/package/root/package.json" ||
+        pathStr === "/mock/package/root/src/prettier-config/.prettierignore"
+      );
+    });
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 
@@ -158,7 +177,11 @@ describe("Config Files Copying", () => {
   });
 
   it("should warn when source .prettierignore does not exist", () => {
-    mockExistsSync.mockReturnValue(false);
+    // Mock existsSync to find package.json but not .prettierignore
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      const pathStr = filePath.toString();
+      return pathStr === "/mock/package/root/package.json";
+    });
 
     copyConfigFiles();
 
@@ -169,7 +192,14 @@ describe("Config Files Copying", () => {
   });
 
   it("should handle copy errors gracefully", () => {
-    mockExistsSync.mockReturnValue(true);
+    // Mock existsSync to simulate finding package.json and .prettierignore
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      const pathStr = filePath.toString();
+      return (
+        pathStr === "/mock/package/root/package.json" ||
+        pathStr === "/mock/package/root/src/prettier-config/.prettierignore"
+      );
+    });
     mockCopyFileSync.mockImplementation(() => {
       throw new Error("Permission denied");
     });
@@ -185,24 +215,87 @@ describe("Config Files Copying", () => {
   });
 
   it("should use correct source and target paths", () => {
-    mockExistsSync.mockReturnValue(true);
+    // Mock existsSync to simulate finding package.json and .prettierignore
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      const pathStr = filePath.toString();
+      return (
+        pathStr === "/mock/package/root/package.json" ||
+        pathStr === "/mock/package/root/src/prettier-config/.prettierignore"
+      );
+    });
+
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 
     copyConfigFiles();
 
-    // Verify that path.join was called for both source and target paths
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(mockPath.join).toHaveBeenCalledTimes(2);
+    // The function should copy from the package root's src directory
 
-    // Check the first call (source path) - verify structure without checking __dirname value
-    const firstCall = mockPath.join.mock.calls[0];
-    expect(firstCall).toHaveLength(5);
-    expect(firstCall?.slice(1)).toEqual(["..", "src", "prettier-config", ".prettierignore"]);
+    expect(mockCopyFileSync).toHaveBeenCalledWith(
+      "/mock/package/root/src/prettier-config/.prettierignore",
+      "/project/root/.prettierignore",
+    );
+  });
+});
 
-    // Check the second call (target path)
+describe("Package Root Detection", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // Mock console methods to avoid cluttering test output
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    vi.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("should find package root when package.json exists in current directory", () => {
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      return filePath.toString() === "/current/package.json";
+    });
+    mockPath.join.mockImplementation((...args) => args.join("/"));
+    mockPath.dirname.mockImplementation(p => {
+      if (p === "/current") return "/";
+      return p.split("/").slice(0, -1).join("/") || "/";
+    });
+
+    const result = findPackageRoot("/current");
+
+    expect(result).toBe("/current");
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(mockPath.join).toHaveBeenCalledWith("/project/root", ".prettierignore");
+    expect(mockPath.join).toHaveBeenCalledWith("/current", "package.json");
+  });
+
+  it("should find package root by traversing up directories", () => {
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      return filePath.toString() === "/project/package.json";
+    });
+    mockPath.join.mockImplementation((...args) => args.join("/"));
+    mockPath.dirname.mockImplementation(p => {
+      if (p === "/project/nested/deep") return "/project/nested";
+      if (p === "/project/nested") return "/project";
+      if (p === "/project") return "/";
+      return "/";
+    });
+
+    const result = findPackageRoot("/project/nested/deep");
+
+    expect(result).toBe("/project");
+  });
+
+  it("should throw error when package.json is not found", () => {
+    mockExistsSync.mockReturnValue(false);
+    mockPath.join.mockImplementation((...args) => args.join("/"));
+    // eslint-disable-next-line sonarjs/no-invariant-returns
+    mockPath.dirname.mockImplementation(p => {
+      if (p === "/start") return "/";
+      return "/";
+    });
+
+    expect(() => findPackageRoot("/start")).toThrow(
+      "Could not find package.json in any parent directory",
+    );
   });
 });
 
@@ -220,6 +313,23 @@ describe("Main Function Integration", () => {
 
     // Mock path operations
     mockPath.join.mockImplementation((...args) => args.join("/"));
+
+    // Mock path.dirname for findPackageRoot traversal
+    mockPath.dirname.mockImplementation(p => {
+      if (p === "/dist/scripts") return "/dist";
+      if (p === "/dist") return "/mock/package/root";
+      if (p === "/mock/package/root") return "/";
+      return "/";
+    });
+
+    // Mock existsSync to simulate finding package.json (needed for main function)
+    mockExistsSync.mockImplementation((filePath: PathLike) => {
+      const pathStr = filePath.toString();
+      return (
+        pathStr === "/mock/package/root/package.json" ||
+        pathStr === "/mock/package/root/src/prettier-config/.prettierignore"
+      );
+    });
   });
 
   afterEach(() => {
@@ -237,7 +347,6 @@ describe("Main Function Integration", () => {
     mockReadFileSync.mockReturnValue(JSON.stringify(mockPackageJson));
     mockExecSync.mockReturnValueOnce(Buffer.from("8.0.0")); // pnpm detection
     mockExecSync.mockReturnValueOnce(Buffer.from("")); // install command
-    mockExistsSync.mockReturnValue(true);
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockCopyFileSync.mockImplementation(() => {});
 

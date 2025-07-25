@@ -29,6 +29,73 @@ Additional discovery requirements:
 
 ---
 
+## Codebase Discovery - shared-configs
+
+### Tech Stack Analysis
+**Primary Language**: TypeScript (v5.8.3+)
+**Package Manager**: pnpm (v9.12.3) with workspaces
+**Module System**: ESM (type: "module")
+**Build Tool**: tsc (TypeScript compiler) and tsup for bundling
+**Testing**: Vitest with coverage reporting
+**Linting**: ESLint v9+ with flat config
+**Formatting**: Prettier with plugins
+**Git Hooks**: Husky with lint-staged for pre-commit validation
+
+### Project Structure
+```
+shared-configs/
+├── packages/
+│   ├── ts-tooling/           # Main TypeScript tooling configs
+│   ├── claude-code-config/   # Claude Code specific configurations  
+│   └── ide-tooling/          # IDE setup and configuration tools
+├── eslint.config.mjs         # Root ESLint config (uses node preset)
+├── prettier.config.mjs       # Root Prettier config
+├── tsconfig.json            # Root TS config extending @boeschj/ts-tooling
+└── pnpm-workspace.yaml      # Workspace configuration
+```
+
+### Key Patterns & Conventions
+
+**Package Exports**: All packages use modern ESM exports with explicit type definitions and subpath exports (e.g., `./eslint/base`, `./prettier`)
+
+**Configuration Philosophy**: 
+- Highly opinionated, forward-facing configurations
+- Assumes modern environments (Node.js 18+, TypeScript 5+)
+- Built for ESM-first development with bundlers
+- Maximum type safety with @tsconfig/strictest base
+
+**ESLint Configuration**: 
+- Flat config format (eslint.config.mjs)
+- Multiple presets: base, react, next, node
+- Strict type checking with typescript-eslint
+- Security, complexity, and modern JS enforcement
+- Prettier integration as lint rule
+
+**Build Scripts**: All packages follow consistent patterns:
+- `build`: Compile TypeScript 
+- `typecheck`: Type checking only
+- `lint`/`lint:fix`: ESLint validation
+- `format`/`format:check`: Prettier formatting
+- `test`: Vitest testing
+- `clean`: Remove build artifacts
+
+**Pre-commit Validation**: Configured via husky + lint-staged to run tests, linting, type checking, and formatting before commits.
+
+### Architecture Decisions
+1. **Workspace Structure**: Monorepo with pnpm workspaces for shared configurations
+2. **ESM-First**: All packages are ESM modules with explicit type exports
+3. **Strict Type Safety**: Uses @tsconfig/strictest as base with additional strict rules
+4. **Configuration as Code**: All tooling configs are TypeScript/JavaScript for better maintainability
+5. **Peer Dependencies**: Extensive use of peer deps to avoid version conflicts in consuming projects
+
+### Gotchas & Learnings
+- The configurations assume bundler usage and are NOT compatible with plain tsc compilation
+- All packages target very modern environments (Node 18+, latest framework versions)
+- Security and complexity linting is enabled by default and may require rule adjustments
+- Import organization is automated via prettier plugins with specific order preferences
+
+---
+
 ## Core Philosophy
 
 EVERY LINE OF CODE YOU WRITE OR CHANGE IS A LIABILITY. Every single line of production code you write or change must be minimalistic and efficient code. Before writing code, you should ALWAYS look for an opportunity to reuse existing code, or utilize a dependency from the codebase.
