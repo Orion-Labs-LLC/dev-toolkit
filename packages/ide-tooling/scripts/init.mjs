@@ -52,7 +52,10 @@ async function promptYesNo(message) {
 
 async function init() {
   const arguments_ = process.argv.slice(2);
-  const targetDirectory = arguments_[0] || process.cwd();
+  // Filter out the bin command name if it's passed as an argument
+  // This prevents creating an 'init' folder when users run: npx @boeschj/ide-tooling init
+  const filteredArgs = arguments_.filter(arg => arg !== "init");
+  const targetDirectory = path.resolve(filteredArgs[0] || process.cwd());
 
   console.log(`\n🚀 IDE Tooling Setup`);
   console.log(`Target directory: ${targetDirectory}\n`);
