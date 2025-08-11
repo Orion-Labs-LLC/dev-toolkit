@@ -1,5 +1,3 @@
-# Development Guidelines for Claude
-
 # Core Philosophy
 
 EVERY LINE OF CODE YOU WRITE OR CHANGE IS A LIABILITY. Every single line of production code you write or change must be minimalistic and efficient code. Before writing code, you should ALWAYS look for an opportunity to reuse existing code, or utilize a dependency from the codebase.
@@ -74,24 +72,3 @@ When suggesting or making changes:
 - Flag any deviations from these guidelines with clear justification
 - Suggest improvements that align with these principles when you see opportunities
 - When unsure, ask for clarification rather than making assumptions
-
-## Table of Contents
-
-1. @.claude/knowledge/self-documentation.md - How to discover and document the tech stack
-2. @.claude/knowledge/type-safety.md - Type system rules and domain modeling
-3. @.claude/knowledge/code-quality.md - Coding standards, naming conventions, and functional programming
-4. @.claude/knowledge/refactoring.md - When and how to refactor, DRY principles
-5. @.claude/knowledge/security.md - Input validation and security checklist
-6. @.claude/knowledge/testing-philosophy.md - Testing principles and antipatterns
-
-## Quick Reference
-
-For quick access to the most important principles:
-- **Core Philosophy**: Every line of code is a liability - write minimal, efficient code
-- **Type Safety**: Never bypass the type system
-- **Code Quality**: Self-documenting code over comments
-- **Refactoring**: Only when it genuinely improves the code
-- **Security**: Validate all inputs with schemas
-- **Development**: Small, incremental changes that maintain working state
-
-Refer to individual sections for detailed guidelines and examples.
