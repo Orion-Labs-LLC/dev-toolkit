@@ -24,7 +24,8 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "unicorn/prefer-node-protocol": "off", //forces us out of modern TS practices
       "unicorn/import-style": "off", //This rule enforces bad practice. named imports are preferred
       "security/detect-non-literal-fs-filename": "warn", //false positive in jsx
-      "security/detect-object-injection": "warn", //triggers on some util functions,
+      "security/detect-object-injection": "off", //too many false positives
+      "sonarjs/prefer-read-only-props": "off",
     },
   },
 

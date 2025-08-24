@@ -6,8 +6,6 @@ import type { TSESLint } from "@typescript-eslint/utils";
 import jsxAccessibilityPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-// @ts-expect-error - No typedefs for this
-import tailwindPlugin from "eslint-plugin-tailwindcss";
 import tseslint from "typescript-eslint";
 
 import baseConfig from "./base.js";
@@ -29,26 +27,16 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
     },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
   },
 
   {
-    files: ["**/*.{ts,tsx}"],
-    plugins: {
-      tailwindcss: tailwindPlugin,
-    },
+    files: ["**/*.tsx"],
     rules: {
-      ...tailwindPlugin.configs.recommended.rules,
+      "sonarjs/no-nested-functions": "off",
     },
     settings: {
-      tailwindcss: {
-        callees: ["cn", "cva"], //lint tailwind in cn or cva utils
-        // Tailwind v4 doesn't use config files by default, suppress the warning
-        config: null,
+      react: {
+        version: "detect",
       },
     },
   },

@@ -1,6 +1,6 @@
 {
   "name": "@boeschj/ts-tooling",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "TypeScript tooling configuration package with ESLint, Prettier, and TSConfigs",
   "main": "./dist/index.js",
   "type": "module",
@@ -90,7 +90,6 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-security": "^3.0.1",
     "eslint-plugin-sonarjs": "^3.0.4",
-    "eslint-plugin-tailwindcss": "^4.0.0-beta.0",
     "eslint-plugin-unicorn": "^60.0.0",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",

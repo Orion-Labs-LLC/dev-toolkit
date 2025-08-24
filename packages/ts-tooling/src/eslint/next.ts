@@ -8,7 +8,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...reactConfig,
 
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ["**/*.{ts,tsx,js,jsx}"],
     plugins: {
       "@next/next": nextPlugin,
     },
