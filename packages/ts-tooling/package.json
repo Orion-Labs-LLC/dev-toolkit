@@ -1,6 +1,6 @@
 {
   "name": "@boeschj/ts-tooling",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "TypeScript tooling configuration package with ESLint, Prettier, and TSConfigs",
   "main": "./dist/index.js",
   "type": "module",
@@ -69,12 +69,13 @@
   "devDependencies": {
     "@types/eslint-plugin-security": "^3.0.0",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^24.1.0",
-    "@typescript-eslint/utils": "^8.38.0",
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/utils": "^8.40.0",
     "@vitest/coverage-v8": "^3.2.4",
-    "eslint": "^9.31.0",
+    "eslint": "^9.34.0",
+    "eslint-plugin-tailwindcss": "4.0.0-beta.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
@@ -85,17 +86,17 @@
     "@tsconfig/strictest": "^2.0.5",
     "eslint": "^9.20.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-security": "^3.0.1",
     "eslint-plugin-sonarjs": "^3.0.4",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-unicorn": "^60.0.0",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.23.0",
-    "eslint-plugin-prettier": "^5.5.3",
-    "eslint-plugin-security": "^3.0.1"
+    "typescript-eslint": "^8.23.0"
   },
   "dependencies": {
     "globals": "^16.3.0"

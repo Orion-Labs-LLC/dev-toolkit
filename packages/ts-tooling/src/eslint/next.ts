@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
-// External ESLint plugins lack proper TypeScript definitions
-
-// @ts-expect-error - No typedefs for this
 import nextPlugin from "@next/eslint-plugin-next";
 import type { TSESLint } from "@typescript-eslint/utils";
 import tseslint from "typescript-eslint";
@@ -17,8 +13,13 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "@next/next": nextPlugin,
     },
     rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
+      //type assertions needed until Next.js provides proper TypeScript definitions for flat config :/
+      //https://github.com/vercel/next.js/issues/82967
+      ...(nextPlugin.configs.recommended.rules as Record<string, TSESLint.FlatConfig.RuleEntry>),
+      ...(nextPlugin.configs["core-web-vitals"].rules as Record<
+        string,
+        TSESLint.FlatConfig.RuleEntry
+      >),
     },
   },
 );
