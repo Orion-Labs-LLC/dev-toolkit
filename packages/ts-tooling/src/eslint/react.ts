@@ -47,6 +47,8 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     settings: {
       tailwindcss: {
         callees: ["cn", "cva"], //lint tailwind in cn or cva utils
+        // Tailwind v4 doesn't use config files by default, suppress the warning
+        config: null,
       },
     },
   },

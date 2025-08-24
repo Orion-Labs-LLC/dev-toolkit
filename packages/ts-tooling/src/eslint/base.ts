@@ -14,6 +14,21 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   sonarjs.configs.recommended, //code complexity and patterns
   unicorn.configs.recommended, //enforces modern JS usage and filename consistency
   eslintPluginPrettierRecommended, //enforce prettier config as lint rules
+
+  // Global overrides for all files (JS and TS)
+  {
+    rules: {
+      "unicorn/no-null": "off", //conflict with type checking
+      "unicorn/no-array-reduce": "off", //sometimes reduce is the best tool for the job 🤷‍♂️
+      "unicorn/prevent-abbreviations": "off", //too opinionated
+      "unicorn/prefer-node-protocol": "off", //forces us out of modern TS practices
+      "unicorn/import-style": "off", //This rule enforces bad practice. named imports are preferred
+      "security/detect-non-literal-fs-filename": "warn", //false positive in jsx
+      "security/detect-object-injection": "warn", //triggers on some util functions,
+    },
+  },
+
+  // TypeScript-specific rules
   {
     files: ["**/*.{ts,tsx,mts}"],
     rules: {
@@ -53,13 +68,6 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
         },
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
-      "unicorn/no-null": "off", //conflict with type checking
-      "unicorn/no-array-reduce": "off", //sometimes reduce is the best tool for the job 🤷‍♂️
-      "unicorn/prevent-abbreviations": "off", //too opinionated
-      "unicorn/prefer-node-protocol": "off", //forces us out of modern TS practices
-      "security/detect-non-literal-fs-filename": "warn", //false positive in jsx
-      "security/detect-object-injection": "warn", //triggers on some util functions,
-      "unicorn/import-style": "off", //This rule enforces bad practice. named imports are preferred
     },
     languageOptions: {
       parserOptions: {
