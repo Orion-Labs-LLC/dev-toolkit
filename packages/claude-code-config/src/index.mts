@@ -1,13 +1,13 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { promises as fs } from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const version = '1.0.0';
+export const version = "1.0.0";
 
-export type ProjectType = 'typescript-library' | 'web-application' | 'api-service';
+export type ProjectType = "typescript-library" | "web-application" | "api-service";
 
 export interface ClaudeConfig {
   readonly projectType: ProjectType;
@@ -24,19 +24,19 @@ export interface SetupOptions {
 
 export const createClaudeConfigFile = async (options: SetupOptions): Promise<void> => {
   const { targetDirectory, config, overwrite = false } = options;
-  
-  const templatePath = path.join(__dirname, '../templates/claude.md');
-  const infraTemplatePath = path.join(__dirname, '../templates/infrastructure.md');
-  
-  const claudeFilePath = path.join(targetDirectory, 'CLAUDE.md');
-  const infraFilePath = path.join(targetDirectory, 'infrastructure.md');
-  
-  if (!overwrite && await fileExists(claudeFilePath)) {
-    throw new Error('CLAUDE.md already exists. Use --overwrite to replace it.');
+
+  const templatePath = path.join(__dirname, "../templates/claude.md");
+  const infraTemplatePath = path.join(__dirname, "../templates/infrastructure.md");
+
+  const claudeFilePath = path.join(targetDirectory, "CLAUDE.md");
+  const infraFilePath = path.join(targetDirectory, "infrastructure.md");
+
+  if (!overwrite && (await fileExists(claudeFilePath))) {
+    throw new Error("CLAUDE.md already exists. Use --overwrite to replace it.");
   }
-  
+
   await fs.copyFile(templatePath, claudeFilePath);
-  
+
   if (config.includeInfrastructureGuide) {
     await fs.copyFile(infraTemplatePath, infraFilePath);
   }
