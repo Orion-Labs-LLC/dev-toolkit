@@ -20,7 +20,7 @@ Languages:
 - TypeScript > v5
 
 Libraries:
-- TailwindCSS > v3 (for now 😬)
+- TailwindCSS > v4
 
 Build Tools:
 - Modern bundlers (Vite, Esbuild, Bun)
