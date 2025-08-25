@@ -26,6 +26,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       ...jsxAccessibilityPlugin.configs.recommended.rules,
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
+      "react/no-unescaped-entities": "off",
     },
   },
 
